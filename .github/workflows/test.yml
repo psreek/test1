@@ -1,0 +1,46 @@
+name: Docker CI/CD
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout codee
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+
+    # Step 3: Install dependencies (for tests)
+  
+
+
+    # Step 7: Log in to Docker Hub
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    # Step 8: Build Docker image
+    - name: Build Docker image
+      run: |
+        docker build -t sreekantp298/myapp:${{ github.sha }} -f DockerFile .
+        docker tag sreekantp298/myapp:${{ github.sha }} sreekantp298/myapp:latest
+
+    # Step 9: Push Docker image
+    - name: Push Docker image
+      run: |
+        docker push sreekantp298/myapp:${{ github.sha }}
+        docker push sreekantp298/myapp:latest
