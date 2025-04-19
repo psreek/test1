@@ -36,7 +36,7 @@ jobs:
     # Step 8: Build Docker image
     - name: Build Docker image
       run: |
-        docker build -t sreekantp298/myapp:${{ github.sha }} -f DockerFile .
+        docker build -t sreekantp298/myapp:${{ github.sha }} -f Dockerfile .
         docker tag sreekantp298/myapp:${{ github.sha }} sreekantp298/myapp:latest
 
     # Step 9: Push Docker image
