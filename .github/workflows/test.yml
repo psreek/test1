@@ -44,5 +44,3 @@ jobs:
       run: |
         docker push sreekantp298/myapp:${{ github.sha }}
         docker push sreekantp298/myapp:ci-${{ github.run_number }}
-        docker push sreekantp298/myapp:latest
-       
